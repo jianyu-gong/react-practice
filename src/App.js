@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
 import Person from './Person/Person.js';
+import UserInput from './UserInput/UserInput';
+import UserOutput from './UserOutput/UserOutput';
 
 class App extends Component {
 
@@ -22,12 +24,22 @@ class App extends Component {
       })
   }
 
-  changeNameHandler = (event) => {
+  changeNameHandler = ( event ) => {
     this.setState({
       person:[
         {name: event.target.value, age: 20},
         {name: "Yixin", age: 30},
         {name: "Google", age: 3}
+      ]
+      })
+  }
+
+  inputHandler = ( event ) => {
+    this.setState({
+      person:[
+        {name: event.target.value, age: 20},
+        {name: event.target.value, age: 30},
+        {name: event.target.value, age: 3}
       ]
       })
   }
@@ -53,6 +65,11 @@ class App extends Component {
                 change={this.changeNameHandler} />
         <Person name={this.state.person[1].name} age={this.state.person[1].age}>My Hobbie is hiking.</Person>
         <Person name={this.state.person[2].name} age={this.state.person[2].age}/>
+        <UserInput changed={this.inputHandler}
+                   currentName={this.state.person[0].name} />
+        <UserOutput userName={this.state.person[1].name} />
+        <UserOutput userName={this.state.person[2].name} />
+        <UserOutput userName='Jay' />
       </div>
     );
   }
