@@ -59,6 +59,26 @@ class App extends Component {
       cursor: 'pointer'
     };
 
+    let person = null;
+
+    if ( this.state.showName ) {
+      person = (
+        <div>
+          <Person 
+            name={this.state.person[0].name} 
+            age={this.state.person[0].age} 
+            click={this.switchNameHandler.bind(this, "Jay Gong")}
+            change={this.changeNameHandler} />
+          <Person 
+            name={this.state.person[1].name} 
+            age={this.state.person[1].age}>My Hobbie is hiking.</Person>
+          <Person 
+            name={this.state.person[2].name} 
+            age={this.state.person[2].age}/>
+        </div>
+      );
+    }
+
     return (
       <div className="App">
         <h1>Hi, I'm a React App</h1>
@@ -71,22 +91,7 @@ class App extends Component {
                 style={style}>
           显示/隐藏姓名
         </button>
-        {
-          this.state.showName ?
-            <div>
-              <Person 
-                name={this.state.person[0].name} 
-                age={this.state.person[0].age} 
-                click={this.switchNameHandler.bind(this, "Jay Gong")}
-                change={this.changeNameHandler} />
-              <Person 
-                name={this.state.person[1].name} 
-                age={this.state.person[1].age}>My Hobbie is hiking.</Person>
-              <Person 
-                name={this.state.person[2].name} 
-                age={this.state.person[2].age}/>
-            </div> : null
-        }
+        {person}
         <UserInput changed={this.inputHandler}
                    currentName={this.state.person[0].name} />
         <UserOutput userName={this.state.person[1].name} />
