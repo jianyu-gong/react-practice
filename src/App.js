@@ -8,9 +8,9 @@ class App extends Component {
 
   state = {
     person:[
-    {name: "Jay", age: 20},
-    {name: "Yixin", age: 30},
-    {name: "Google", age: 3}],
+    {id: "1", name: "Jay", age: 20},
+    {id: "2", name: "Yixin", age: 30},
+    {id: "3", name: "Google", age: 3}],
     showName: false
   }
 
@@ -45,6 +45,12 @@ class App extends Component {
       })
   }
 
+  deleteHandler = ( index ) => {
+    const person = [...this.state.person];
+    person.splice(index, 1);
+    this.setState({person:person});
+  }
+
   clickHandler = () => {
     const doesShow = this.state.showName;
     this.setState({showName: !doesShow});
@@ -64,10 +70,12 @@ class App extends Component {
     if ( this.state.showName ) {
       person = (
         <div>
-          {this.state.person.map((person) => {
-            return <Person 
+          {this.state.person.map((person, index) => {
+            return <Person
+              click={() => this.deleteHandler(index)} 
               name={person.name}
-              age={person.age} />
+              age={person.age}
+              key={person.id} />
           })}
         </div>
       );
@@ -86,11 +94,11 @@ class App extends Component {
           显示/隐藏姓名
         </button>
         {person}
-        <UserInput changed={this.inputHandler}
+        {/* <UserInput changed={this.inputHandler}
                    currentName={this.state.person[0].name} />
         <UserOutput userName={this.state.person[1].name} />
         <UserOutput userName={this.state.person[2].name} />
-        <UserOutput userName='Jay' />
+        <UserOutput userName='Jay' /> */}
       </div>
     );
   }
